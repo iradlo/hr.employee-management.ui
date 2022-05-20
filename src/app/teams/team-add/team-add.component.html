@@ -1,0 +1,49 @@
+<div>
+  <div class='card-header'>
+    Add team
+  </div>
+
+  <div class='card-body'>
+
+    <form (ngSubmit)='saveTeam()' [formGroup]='teamGroupForm'>
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="teamNameId">Team Name</label>
+        <div class="col-md-8">
+          <input class="form-control" id="teamNameId" type="text" formControlName="teamName" [ngClass]="{'is-invalid': (teamGroupForm.get('teamName')?.touched ||
+          teamGroupForm.get('teamName')?.dirty) &&
+          !teamGroupForm.get('teamName')?.valid }" />
+          <span class="invalid-feedback">
+            <span *ngIf="teamGroupForm.get('teamName')?.errors?.['required']">
+              Please enter team name.
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="descriptionId">Description</label>
+        <div class="col-md-8">
+          <textarea class="form-control" id="descriptionId" rows='4' cols='50' formControlName="description" [ngClass]="{'is-invalid': (teamGroupForm.get('description')?.touched ||
+          teamGroupForm.get('description')?.dirty) &&
+          !teamGroupForm.get('description')?.valid }">
+          </textarea>
+          <span class="invalid-feedback">
+            <span *ngIf="teamGroupForm.get('description')?.errors?.['maxLength']">
+              Maximum numbers of characters reached.
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <div>
+        <button class="btn btn-primary" type="submit" style='margin-right: 1rem;' [disabled]="!teamGroupForm.valid">
+          Save
+        </button>
+        <button class="btn btn-outline-secondary" (click)='btnCancel()' type="button">
+          Cancel
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

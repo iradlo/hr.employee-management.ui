@@ -1,0 +1,102 @@
+<div>
+  <div class='card-header'>
+    {{employeeAddHeader}}
+  </div>
+
+  <div class='card-body'>
+
+    <form (ngSubmit)='saveEmployee()' [formGroup]='employeeGroupForm'>
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="nameId">First Name</label>
+        <div class="col-md-8">
+          <input class="form-control" id="nameId" type="text" formControlName="name" [ngClass]="{'is-invalid': (employeeGroupForm.get('name')?.touched ||
+                                       employeeGroupForm.get('name')?.dirty) &&
+                                       !employeeGroupForm.get('name')?.valid }" />
+          <span class="invalid-feedback">
+            <span *ngIf="employeeGroupForm.get('name')?.errors?.['required']">
+              Please enter your first name.
+            </span>
+            <span *ngIf="employeeGroupForm.get('name')?.errors?.['minlength']">
+              The first name must be longer than 3 characters.
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="lastNameId">Last Name</label>
+        <div class="col-md-8">
+          <input class="form-control" id="lastNameId" type="text" formControlName="lastName" [ngClass]="{'is-invalid': (employeeGroupForm.get('lastName')?.touched ||
+          employeeGroupForm.get('lastName')?.dirty) &&
+          !employeeGroupForm.get('lastName')?.valid }" />
+          <span class="invalid-feedback">
+            <span *ngIf="employeeGroupForm.get('lastName')?.errors?.['required']">
+              Please enter your last name.
+            </span>
+            <span *ngIf="employeeGroupForm.get('lastName')?.errors?.['minlength']">
+              The last name must be longer than 3 characters.
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="teamNameId">Team Name</label>
+        <div class="col-md-8">
+          <select class="form-control" id="teamNameId" type="text" formControlName="teamName"
+            (change)='selectedTeamChange($event)' [ngClass]="{'is-invalid': (employeeGroupForm.get('teamName')?.touched ||
+            employeeGroupForm.get('teamName')?.dirty) &&
+            !employeeGroupForm.get('teamName')?.valid }">
+            <option value=''>Select team</option>
+            <option *ngFor="let t of teams" value={{t.teamId}}>
+              {{t.teamName}}
+            </option>
+          </select>
+          <span class="invalid-feedback">
+            <span *ngIf="employeeGroupForm.get('teamName')?.errors?.['required']">
+              Please select team.
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="addressId">Address</label>
+        <div class="col-md-8">
+          <input class="form-control" id="addressId" type="text" formControlName="address" />
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="cityId">City</label>
+        <div class="col-md-8">
+          <input class="form-control" id="cityId" type="text" formControlName="city" />
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="phoneId">Phone</label>
+        <div class="col-md-8">
+          <input class="form-control" id="phoneId" type="text" formControlName="phone" />
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="emailId">Email</label>
+        <div class="col-md-8">
+          <input class="form-control" id="emailId" type="text" formControlName="email" />
+        </div>
+      </div>
+
+      <div>
+        <button class="btn btn-primary" type="submit" style='margin-right: 1rem;' [disabled]="!employeeGroupForm.valid">
+          Save
+        </button>
+        <button class="btn btn-outline-secondary" (click)='bntCancel()' type="button">
+          Cancel
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

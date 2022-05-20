@@ -1,0 +1,47 @@
+<div class='card'>
+  <div class='card-header'>
+    Teams
+  </div>
+
+  <div class='container'>
+
+    <div class='table-responsive'>
+      <div class='row'>
+        <div class='col-sm'>
+          <table class='table' *ngIf='teams.length'>
+            <thead>
+              <tr>
+                <th>
+                  Team name
+                </th>
+                <th>
+                  Description
+                </th>
+                <th>
+                  <button class='btn btn-primary' (click)='btnAddTeam()'>
+                    Add Team
+                  </button>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let t of teams">
+                <td>{{t.teamName}}</td>
+                <td>{{t.description}}</td>
+                <td>
+                  <button class='btn btn-secondary btn-sm' style='margin-right: 1rem;'
+                    (click)='btnClickShowDetails(t.teamId)'>Details</button>
+                  <button class='btn btn-secondary btn-sm' (click)='btnClickDelete(t.teamId)'>Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class='col-sm' *ngIf='showDetails'>
+          <hw-team-members [noDataMsg]='noDataMsg' [teamMembers]='teamMembers'></hw-team-members>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

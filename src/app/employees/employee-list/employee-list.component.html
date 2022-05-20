@@ -1,0 +1,47 @@
+<div class='card'>
+  <div class='card-header'>
+    {{pageTitle}}
+  </div>
+
+  <div class='container'>
+
+    <div class='table-responsive'>
+      <div class='row'>
+        <div class='col-sm'>
+          <table class='table' *ngIf='employees.length'>
+            <thead>
+              <tr>
+                <th>
+                  First name
+                </th>
+                <th>
+                  Last name
+                </th>
+                <th>
+                  <button class='btn btn-primary' (click)='btnAddEmployee()'>
+                    Add Employee
+                  </button>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let e of employees">
+                <td>{{e.name}}</td>
+                <td>{{e.lastName}}</td>
+                <td>
+                  <button class='btn btn-secondary btn-sm' style='margin-right: 1rem;'
+                    (click)='btnClickShowDetails(e.employeeId)'>Details</button>
+                  <button class='btn btn-secondary btn-sm' (click)='btnClickDelete(e.employeeId)'>Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class='col-sm' *ngIf='showDetails && dataIsLoaded'>
+          <hw-employee-details (dataUpdated)='onUpdated()' [employeeData]='selectedEmployee'></hw-employee-details>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

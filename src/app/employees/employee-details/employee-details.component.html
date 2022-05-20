@@ -1,0 +1,65 @@
+<div class='card'>
+  <div class='card-header'>
+    Details
+    <div class="position-absolute top-0 end-0">
+      <button class='btn btn-secondary btn-sm' style='margin-top: 3px; margin-right: 3px;'
+        (click)='btnClickEdit(employeeData.employeeId)'>
+        Edit
+      </button>
+    </div>
+  </div>
+
+  <div class='card-body'>
+    <form>
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="firstNameId">First Name</label>
+        <div class="col-md-8">
+          <input class="form-control" id="firstNameId" type="text" value='{{employeeData?.name}}' readonly />
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="lastNameId">Last Name</label>
+        <div class="col-md-8">
+          <input class="form-control" id="lastNameId" type="text" value='{{employeeData?.lastName}}' readonly />
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="teamNameId">Team Name</label>
+        <div class="col-md-8">
+          <input class="form-control" id="teamNameId" type="text" value='{{employeeData?.team?.teamName}}' readonly />
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="addressId">Address</label>
+        <div class="col-md-8">
+          <input class="form-control" id="addressId" type="text" value='{{employeeData?.address}}' readonly />
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="cityId">City</label>
+        <div class="col-md-8">
+          <input class="form-control" id="cityId" type="text" value='{{employeeData?.city}}' readonly />
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="phoneId">Phone</label>
+        <div class="col-md-8">
+          <input class="form-control" id="phoneId" type="text" value='{{employeeData?.phone}}' readonly />
+        </div>
+      </div>
+
+      <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="emailId">Email</label>
+        <div class="col-md-8">
+          <input class="form-control" id="emailId" type="text" value='{{employeeData?.email}}' readonly />
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
