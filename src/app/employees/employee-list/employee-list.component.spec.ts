@@ -1,7 +1,7 @@
 import { Component, Input, NO_ERRORS_SCHEMA } from "@angular/core";
 import { ComponentFixture, TestBed } from "@angular/core/testing"
 import { MatDialog } from "@angular/material/dialog";
-import { of } from "rxjs";
+import { of, Subscription } from "rxjs";
 import { EmployeeListComponent } from "./employee-list.component";
 import { EmployeeListService } from "./employee-list.service";
 import { IEmployee } from "../employee";
@@ -16,7 +16,8 @@ describe('EmployeeListComponent', () => {
 
   beforeEach(() => {
     EMPLOYEES = [
-      { employeeId: 1, name: 'aaa', lastName: 'bbbb', address: "", city: "", email: "", phone: "", team: { description: "", teamId: 1, teamName: "" } }
+      { employeeId: 1, name: 'aaa', lastName: 'bbbb', address: "", city: "", email: "", phone: "", team: { description: "", teamId: 1, teamName: "" } },
+      { employeeId: 2, name: 'ccc', lastName: 'dddd', address: "", city: "", email: "", phone: "", team: { description: "", teamId: 1, teamName: "" } }
     ];
 
     mockEmployeeService = jasmine.createSpyObj<EmployeeListService>(['getEmployeesHttp', 'deleteEmployee', 'getEmployeeDetails']);
@@ -36,16 +37,25 @@ describe('EmployeeListComponent', () => {
     fixture = TestBed.createComponent(EmployeeListComponent);
   })
 
+  afterEach(() => {
+    fixture.destroy();
+  })
+
   it('should get employees from the service', () => {
     mockEmployeeService.getEmployeesHttp.and.returnValue(of(EMPLOYEES));
     fixture.detectChanges();
-    expect(fixture.componentInstance.employees.length).toBe(1);
+    expect(fixture.componentInstance.employees.length).toBe(2);
     expect(mockEmployeeService.getEmployeesHttp).toHaveBeenCalled();
   })
 
-  xit('should call delete on service', () => {
+  it('should call delete on service', () => {
+    spyOn(window, 'confirm').and.callFake(function () {
+      return true;
+    });
+
     fixture.componentInstance.employees = EMPLOYEES;
-    mockEmployeeService.deleteEmployee.and.returnValue(of(true));
+    mockEmployeeService.deleteEmployee.and.returnValue(of({}));
+    // fixture.detectChanges();
 
     fixture.componentInstance.btnClickDelete(1);
 
@@ -65,7 +75,7 @@ describe('EmployeeListComponent', () => {
     mockEmployeeService.getEmployeesHttp.and.returnValue(of(EMPLOYEES));
     fixture.detectChanges();
 
-    expect(fixture.debugElement.queryAll(By.css('tr')).length).toBe(2);
+    expect(fixture.debugElement.queryAll(By.css('tr')).length).toBe(3);
   })
 
   it('should render employee name and last name correctly', () => {

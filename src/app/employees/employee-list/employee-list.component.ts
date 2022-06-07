@@ -18,7 +18,7 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
   dataIsLoaded: boolean = false;
 
   private selectedId: number = 0;
-  private sub!: Subscription;
+  sub!: Subscription;
 
   constructor(private dialog: MatDialog, private employeeListService: EmployeeListService) { }
 
@@ -27,7 +27,8 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.sub.unsubscribe();
+    if (this.sub)
+      this.sub.unsubscribe();
   }
 
   getEmployees() {
