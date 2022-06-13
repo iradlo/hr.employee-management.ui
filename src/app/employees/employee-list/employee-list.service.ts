@@ -1,13 +1,14 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, Observable, tap, throwError } from "rxjs";
+import { environment } from "src/environments/environment";
 import { IEmployee } from "../employee";
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeListService {
-  private employeeUrl: string = "https://localhost:44383/api/employee";
+  private employeeUrl: string = `${environment.serverAddress}/api/employee`;
 
   constructor(private http: HttpClient) { }
 

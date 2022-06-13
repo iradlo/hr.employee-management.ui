@@ -5,6 +5,7 @@ import { RouterModule } from "@angular/router";
 import { AddTeamComponent } from "./team-add/team-add.component";
 import { TeamMembersComponent } from "./team-members/team-members.component";
 import { TeamsListComponent } from "./team-list/teams-list.component";
+import { AuthgardService } from "../home/login/authgard.service";
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { TeamsListComponent } from "./team-list/teams-list.component";
     BrowserAnimationsModule,
     ReactiveFormsModule,
     RouterModule.forChild([
-      { path: 'teams', component: TeamsListComponent }
+      { path: 'teams', component: TeamsListComponent, canActivate: [AuthgardService] }
     ])
   ]
 })

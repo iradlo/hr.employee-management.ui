@@ -1,22 +1,23 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { Injectable, NgModule } from "@angular/core";
 import { catchError, Observable, tap, throwError } from "rxjs";
+import { environment } from "src/environments/environment";
 import { IEmployee } from "../employee";
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeAddService {
-  private employeeUrl: string = "https://localhost:44383/api/employee";
+  private employeeUrl: string = `${environment.serverAddress}/api/employee`;
 
   constructor(private http: HttpClient) { }
 
-  addNewEmployee(employeeData: IEmployee): Observable<IEmployee> {
+  addNewEmployee(employeeData: IEmployee): Observable<number> {
     console.log(employeeData);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<IEmployee>(this.employeeUrl, employeeData, { headers })
+    return this.http.post<number>(this.employeeUrl, employeeData, { headers })
       .pipe(
-        tap(data => console.log('addNewEmployee: ' + JSON.stringify(data))),
+        tap(data => console.log('addNewEmployee: ' + data)),
         catchError(this.handleError));
   }
 

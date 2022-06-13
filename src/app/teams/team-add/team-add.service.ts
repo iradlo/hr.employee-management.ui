@@ -1,13 +1,14 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, Observable, tap, throwError } from "rxjs";
+import { environment } from "src/environments/environment";
 import { ITeam } from "../team";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeamAddService {
-  private teamsUrl: string = "https://localhost:44383/api/team";
+  private teamsUrl: string = `${environment.serverAddress}/api/team`;
 
   constructor(private http: HttpClient) { }
 
